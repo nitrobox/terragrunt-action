@@ -74,7 +74,7 @@ runs:
       if: steps.mise-check.outputs.mise_config_exists == 'true'
       uses: jdx/mise-action@v2
       with:
-        version: 2025.6.8
+        version: 2025.12.12
       env:
         MISE_GITHUB_TOKEN: ${{ inputs.github_token || github.token }}
 
@@ -82,7 +82,7 @@ runs:
       if: steps.mise-check.outputs.mise_config_exists == 'false'
       uses: jdx/mise-action@v2
       with:
-        version: 2025.6.8
+        version: 2025.12.12
         tool_versions: |
           terragrunt ${{ inputs.tg_version }}
           ${{ inputs.tofu_version && format('opentofu {0}', inputs.tofu_version) || '' }}

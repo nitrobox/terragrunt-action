@@ -170,6 +170,13 @@ function main {
 
   local exit_code
   exit_code="${terragrunt_exit_code:-0}"
+  echo "tg_action_exit_code=${exit_code}" >> "${GITHUB_OUTPUT}"
+
+  if [[ "${INPUT_TG_SKIP_ACTION_LOG_OUTPUT:-0}" == "1" ]]; then
+    log "Skipping including terragrunt log output in action output as requested"
+    log "also skipping commenting the terragrunt output"
+    exit $exit_code
+  fi
 
   local terragrunt_log_content
   terragrunt_log_content=$(cat "${log_file}")
@@ -188,8 +195,6 @@ ${terragrunt_output}
 </details>
     "
   fi
-
-  echo "tg_action_exit_code=${exit_code}" >> "${GITHUB_OUTPUT}"
 
   local tg_action_output
   tg_action_output=$(clean_multiline_text "${terragrunt_output}")

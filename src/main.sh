@@ -175,6 +175,7 @@ function main {
   if [[ "${INPUT_TG_SKIP_ACTION_LOG_OUTPUT:-0}" == "1" ]]; then
     log "Skipping including terragrunt log output in action output as requested"
     log "also skipping commenting the terragrunt output"
+    echo "tg_action_output=disabled" >> "${GITHUB_OUTPUT}"
     exit $exit_code
   fi
 

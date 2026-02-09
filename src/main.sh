@@ -43,6 +43,7 @@ function run_terragrunt {
   terragrunt "${command[@]}" 2>&1 | tee "${terragrunt_log_file}"
   # terragrunt_exit_code can be used later to determine if execution was successful
   terragrunt_exit_code=${PIPESTATUS[0]}
+  log "Terragrunt exit code from pipe: $terragrunt_exit_code"
 }
 
 # post comment to pull request
@@ -176,6 +177,7 @@ function main {
     log "Skipping including terragrunt log output in action output as requested"
     log "also skipping commenting the terragrunt output"
     echo "tg_action_output=disabled" >> "${GITHUB_OUTPUT}"
+    log "Got Exit Code $exit_code"
     exit $exit_code
   fi
 
